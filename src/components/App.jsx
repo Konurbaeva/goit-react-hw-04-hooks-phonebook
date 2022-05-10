@@ -1,4 +1,7 @@
+import Phonebook from "./Phonebook";
+
 export const App = () => {
+  
   return (
     <div
       style={{
@@ -10,7 +13,8 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template!
+      <Phonebook/>
     </div>
   );
 };
+
