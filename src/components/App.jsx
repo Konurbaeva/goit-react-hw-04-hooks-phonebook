@@ -62,7 +62,9 @@ render(){
  <button type="button" onClick={this.addContact}>Add contact</button>
       </form>
       <div className="Contacts">Contacts</div>
-     {JSON.stringify(contacts)}
+     {contacts.map(contact =>{
+       return <ul><li>{contact.name} {contact.id}</li></ul>
+     })}
     </div>
   );
 }
