@@ -41,11 +41,10 @@ render(){
   return (
     <div
       style={{
-        height: '100vh',
-        display: 'flex',
+        height: '30vh',
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 40,
+        fontSize: 30,
         color: '#010101'
       }}
     >
@@ -62,8 +61,10 @@ render(){
  <button type="button" onClick={this.addContact}>Add contact</button>
       </form>
       <div className="Contacts">Contacts</div>
-     {contacts.map(contact =>{
-       return <ul><li>{contact.name} {contact.id}</li></ul>
+     {contacts.map(({name, id}) =>{
+       return <ul key={id}>
+         <li>{name}  {id}</li>
+         </ul>
      })}
     </div>
   );
