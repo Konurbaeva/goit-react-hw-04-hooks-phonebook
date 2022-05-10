@@ -58,7 +58,21 @@ render(){
   required
 />
 
- <button type="button" onClick={this.addContact}>Add contact</button>
+ <button type="button" onClick={this.addContact}
+ style = { 
+{
+  border: 'none',
+  padding: '15px 32px',
+  textAlign: 'center',
+  textDecoration: 'none',
+  display: 'inlineBlock',
+  fontSize: '16px',
+  margin: '4px 2px',
+  cursor: 'pointer'
+}
+}
+ 
+ >Add contact</button>
       </form>
       <div className="Contacts">Contacts</div>
      {contacts.map(({name, id}) =>{
