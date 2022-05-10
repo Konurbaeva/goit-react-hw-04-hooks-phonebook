@@ -29,9 +29,14 @@ export class App extends Component {
   };
 
     filter = query => {
-      console.log('query: ' + query);
+      console.log('query: ' + JSON.stringify(query));
       this.setState({ filter: query });
   };
+
+  handleSearch = query => {
+
+  console.log('QUERY: ' + JSON.stringify(query));
+  }
 
   handleChange = e => {
     this.setState({ 
@@ -62,7 +67,8 @@ render(){
     >
       <input
       value={filter}
-      onChange={this.filter}
+      // onChange={this.filter}
+      onChange={this.handleSearch}
       placeholder="Search ..."
       type="text"
       name="search"
