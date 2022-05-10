@@ -4,9 +4,7 @@ import { nanoid } from 'nanoid'
 
 export class App extends Component {
   state = {
-   contacts: [
-   
-  ],
+   contacts: [],
    name: ''
   }
 
@@ -20,6 +18,12 @@ export class App extends Component {
       contacts: [contact, ...contacts],
     }));
   }
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
 
   handleChange = e => {
     this.setState({ name: e.currentTarget.value });
@@ -51,6 +55,7 @@ render(){
       <input
       value={this.state.name}
       onChange={this.handleChange}
+      placeholder="Enter name"
   type="text"
   name="name"
   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -78,6 +83,8 @@ render(){
      {contacts.map(({name, id}) =>{
        return <ul key={id}>
          <li>{name}  {id}</li>
+         <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>
+        
          </ul>
      })}
     </div>
