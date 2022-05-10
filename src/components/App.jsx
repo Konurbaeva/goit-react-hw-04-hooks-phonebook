@@ -4,28 +4,26 @@ import { nanoid } from 'nanoid'
 
 export class App extends Component {
   state = {
-   // contacts: [],
    contacts: [
-    {id: 'id-1', name: 'Rosie Simpson'},
-    {id: 'id-2', name: 'Hermione Kline'},
-    {id: 'id-3', name: 'Eden Clements'},
-    {id: 'id-4', name: 'Annie Copeland'},
+   
   ],
-    name: 'Madina'
+   name: ''
   }
 
-  addContact = () => {
+  addContact = (e) => {
     const contact = {
       id: nanoid(),
-      name: 'Madina'
+      name: this.state.name
     };
 
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
-   //  this.setState({contacts: [...this.state.contacts, contact]});
-   
   }
+
+  handleChange = e => {
+    this.setState({ name: e.currentTarget.value });
+  };
 
   handleSubmit = evt => {
     evt.preventDefault();
@@ -51,6 +49,8 @@ render(){
       <form onSubmit={this.handleSubmit}>
         Name
       <input
+      value={this.state.name}
+      onChange={this.handleChange}
   type="text"
   name="name"
   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
