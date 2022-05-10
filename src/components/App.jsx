@@ -82,7 +82,7 @@ render(){
       <div className="Contacts">Contacts</div>
      {contacts.map(({name, id}) =>{
        return <ul key={id}>
-         <li>{name}  {id}</li>
+         <li>{name}</li>
          <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>
         
          </ul>
