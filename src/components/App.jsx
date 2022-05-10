@@ -36,8 +36,7 @@ export class App extends Component {
   };
 
 render(){
-  // const { contacts } = this.state;
-
+  const { contacts } = this.state;
 
   return (
     <div
@@ -63,7 +62,7 @@ render(){
  <button type="button" onClick={this.addContact}>Add contact</button>
       </form>
       <div className="Contacts">Contacts</div>
-     {JSON.stringify(this.state.contacts)}
+     {JSON.stringify(contacts)}
     </div>
   );
 }
