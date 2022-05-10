@@ -5,13 +5,16 @@ import { nanoid } from 'nanoid'
 export class App extends Component {
   state = {
    contacts: [],
-   name: ''
+   name: '',
+   number: '',
+   filter: ''
   }
 
   addContact = (e) => {
     const contact = {
       id: nanoid(),
-      name: this.state.name
+      name: this.state.name,
+      number: this.state.number
     };
 
     this.setState(({ contacts }) => ({
@@ -25,8 +28,15 @@ export class App extends Component {
     }));
   };
 
+    filter = query => {
+      console.log('query: ' + query);
+      this.setState({ filter: query });
+  };
+
   handleChange = e => {
-    this.setState({ name: e.currentTarget.value });
+    this.setState({ 
+      [e.target.name]: e.currentTarget.value
+    });
   };
 
   handleSubmit = evt => {
@@ -38,7 +48,7 @@ export class App extends Component {
   };
 
 render(){
-  const { contacts } = this.state;
+  const { contacts, name, number, filter } = this.state;
 
   return (
     <div
@@ -50,16 +60,33 @@ render(){
         color: '#010101'
       }}
     >
+      <input
+      value={filter}
+      onChange={this.filter}
+      placeholder="Search ..."
+      type="text"
+      name="search"
+/>
       <form onSubmit={this.handleSubmit}>
         Name
       <input
-      value={this.state.name}
+      value={name}
       onChange={this.handleChange}
       placeholder="Enter name"
   type="text"
   name="name"
   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+  required
+/>
+<input
+  value={number}
+  onChange={this.handleChange}
+  type="tel"
+  name="number"
+  placeholder="Enter phone number"
+  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
   required
 />
 
@@ -80,11 +107,10 @@ render(){
  >Add contact</button>
       </form>
       <div className="Contacts">Contacts</div>
-     {contacts.map(({name, id}) =>{
+     {contacts.map(({name, number, id}) =>{
        return <ul key={id}>
-         <li>{name}</li>
-         <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>
-        
+         <li>{name} {number}</li>
+         <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>      
          </ul>
      })}
     </div>
