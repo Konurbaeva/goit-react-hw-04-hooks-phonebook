@@ -4,7 +4,13 @@ import { nanoid } from 'nanoid'
 
 export class App extends Component {
   state = {
-    contacts: [],
+   // contacts: [],
+   contacts: [
+    {id: 'id-1', name: 'Rosie Simpson'},
+    {id: 'id-2', name: 'Hermione Kline'},
+    {id: 'id-3', name: 'Eden Clements'},
+    {id: 'id-4', name: 'Annie Copeland'},
+  ],
     name: 'Madina'
   }
 
@@ -14,11 +20,11 @@ export class App extends Component {
       name: 'Madina'
     };
 
-    console.log('contact: ' + JSON.stringify(contact))
-
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
+   //  this.setState({contacts: [...this.state.contacts, contact]});
+   
   }
 
   handleSubmit = evt => {
@@ -30,6 +36,9 @@ export class App extends Component {
   };
 
 render(){
+  // const { contacts } = this.state;
+
+
   return (
     <div
       style={{
@@ -53,6 +62,8 @@ render(){
 
  <button type="button" onClick={this.addContact}>Add contact</button>
       </form>
+      <div className="Contacts">Contacts</div>
+     {JSON.stringify(this.state.contacts)}
     </div>
   );
 }
