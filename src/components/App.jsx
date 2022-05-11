@@ -75,13 +75,6 @@ render(){
         color: '#010101'
       }}
     >
-      <input
-      value={filter}
-      onChange={this.handleSearch}
-      placeholder="Search ..."
-      type="text"
-      name="search"
-/>
 
 <div style={borderStyle}>
       <form onSubmit={this.handleSubmit}>
@@ -126,6 +119,14 @@ Number
       </form>
       </div>
 
+      <input
+      value={filter}
+      onChange={this.handleSearch}
+      placeholder="Search ..."
+      type="text"
+      name="search"
+/>
+
       <div className="Contacts">Contacts</div>
      {contacts.map(({name, number, id}) =>{
        return <ul key={id}>
@@ -133,7 +134,9 @@ Number
          <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>      
          </ul>
      })}
-    </div>
+
+
+    </div> 
   );
-}
+ }
 };
