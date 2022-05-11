@@ -1,6 +1,7 @@
 import {Component} from "react";
 import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
+import ContactList from "./ContactList";
 
 export class App extends Component {
   state = {
@@ -94,12 +95,7 @@ render(){
 {this.state.filter}
 
       <div className="Contacts">Contacts</div>
-     {contacts.map(({name, number, id}) =>{
-       return <ul key={id}>
-         <li>{name} {number}</li>
-         <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>      
-         </ul>
-     })}
+   <ContactList contacts={contacts} deleteContact={this.deleteContact}/>
     </div> 
   );
  }
