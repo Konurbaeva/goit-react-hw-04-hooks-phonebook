@@ -1,13 +1,15 @@
 function Filter({ filter, handleSearch }) {
     return (
-        <input
-            value={filter}
-            onChange={handleSearch}
-            placeholder="Search ..."
-            type="text"
-            name="search"
-        />
-        // {filter}
+        <div>
+            <input
+                value={filter}
+                onChange={handleSearch}
+                placeholder="Search ..."
+                type="text"
+                name="search"
+            />
+            {filter}
+        </div>
     );
 }
 

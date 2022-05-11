@@ -31,7 +31,6 @@ export class App extends Component {
   };
 
   handleSearch = e => {
-
    let lowerCase = e.target.value.toLowerCase();
    this.setState({filter: lowerCase});
    console.log('QUERY: ' + JSON.stringify(lowerCase));
@@ -72,7 +71,6 @@ render(){
         color: '#010101'
       }}
     >
-
 <div style={borderStyle}>
      <ContactForm handleSubmit={this.handleSubmit} name={name} handleChange={this.handleChange}
      number={number} addContact={this.addContact}/>

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
     return (
         <form onSubmit={handleSubmit}>
@@ -42,5 +44,13 @@ function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
         </form>
     );
 }
+
+ContactForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    number: PropTypes.string.isRequired,
+    addContact: PropTypes.func.isRequired
+};
 
 export default ContactForm;
