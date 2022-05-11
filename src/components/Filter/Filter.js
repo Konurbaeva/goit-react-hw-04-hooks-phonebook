@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Filter({ filter, handleSearch }) {
     return (
         <div>
@@ -12,5 +14,11 @@ function Filter({ filter, handleSearch }) {
         </div>
     );
 }
+
+
+Filter.propTypes = {
+    filter: PropTypes.string.isRequired,
+    handleSearch: PropTypes.func.isRequired,
+};
 
 export default Filter;
