@@ -1,4 +1,3 @@
-
 import {Component} from "react";
 import { nanoid } from 'nanoid'
 
@@ -28,11 +27,11 @@ export class App extends Component {
     }));
   };
 
-    filter = query => {
+/*     filter = query => {
       console.log('query: ' + JSON.stringify(query));
       this.setState({ filter: query });
   };
-
+ */
   handleSearch = e => {
 
    let lowerCase = e.target.value.toLowerCase();
@@ -55,8 +54,16 @@ export class App extends Component {
     form.reset();
   };
 
+  
+
 render(){
   const { contacts, name, number, filter } = this.state;
+  const borderStyle = {
+    padding: '10px',
+    border: '1px solid black',
+    borderRadius:'5px',
+    width:'320px'
+};
 
   return (
     <div
@@ -69,13 +76,14 @@ render(){
       }}
     >
       <input
-     // value={filter}
-      // onChange={this.filter}
+      value={filter}
       onChange={this.handleSearch}
       placeholder="Search ..."
       type="text"
       name="search"
 />
+
+<div style={borderStyle}>
       <form onSubmit={this.handleSubmit}>
         Name
       <input
@@ -88,6 +96,7 @@ render(){
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
   required
 />
+Number
 <input
   value={number}
   onChange={this.handleChange}
@@ -115,6 +124,8 @@ render(){
  
  >Add contact</button>
       </form>
+      </div>
+
       <div className="Contacts">Contacts</div>
      {contacts.map(({name, number, id}) =>{
        return <ul key={id}>
