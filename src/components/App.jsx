@@ -1,5 +1,6 @@
 import {Component} from "react";
 import { nanoid } from 'nanoid'
+import ContactForm from "./ContactForm";
 
 export class App extends Component {
   state = {
@@ -79,46 +80,8 @@ render(){
     >
 
 <div style={borderStyle}>
-      <form onSubmit={this.handleSubmit}>
-        Name
-      <input
-      value={name}
-      onChange={this.handleChange}
-      placeholder="Enter name"
-  type="text"
-  name="name"
-  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  required
-/>
-Number
-<input
-  value={number}
-  onChange={this.handleChange}
-  type="tel"
-  name="number"
-  placeholder="Enter phone number"
-  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  required
-/>
-
- <button type="button" onClick={this.addContact}
- style = { 
-{
-  border: 'none',
-  padding: '15px 32px',
-  textAlign: 'center',
-  textDecoration: 'none',
-  display: 'inlineBlock',
-  fontSize: '16px',
-  margin: '4px 2px',
-  cursor: 'pointer'
-}
-}
- 
- >Add contact</button>
-      </form>
+     <ContactForm handleSubmit={this.handleSubmit} name={name} handleChange={this.handleChange}
+     number={number} addContact={this.addContact}/>
       </div>
 
       <input
