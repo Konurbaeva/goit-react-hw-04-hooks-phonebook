@@ -35,10 +35,12 @@ export class App extends Component {
   handleSearch = e => {
 
    let lowerCase = e.target.value.toLowerCase();
-
    this.setState({filter: lowerCase});
    console.log('QUERY: ' + JSON.stringify(lowerCase));
   }
+
+
+
 
   handleChange = e => {
     this.setState({ 
@@ -126,6 +128,7 @@ Number
       type="text"
       name="search"
 />
+{this.state.filter}
 
       <div className="Contacts">Contacts</div>
      {contacts.map(({name, number, id}) =>{
@@ -134,8 +137,6 @@ Number
          <button type="button" onClick={() => this.deleteContact(id)}>Delete</button>      
          </ul>
      })}
-
-
     </div> 
   );
  }
