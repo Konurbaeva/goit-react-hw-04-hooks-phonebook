@@ -33,9 +33,12 @@ export class App extends Component {
       this.setState({ filter: query });
   };
 
-  handleSearch = query => {
+  handleSearch = e => {
 
-  console.log('QUERY: ' + JSON.stringify(query));
+   let lowerCase = e.target.value.toLowerCase();
+
+   this.setState({filter: lowerCase});
+   console.log('QUERY: ' + JSON.stringify(lowerCase));
   }
 
   handleChange = e => {
@@ -66,7 +69,7 @@ render(){
       }}
     >
       <input
-      value={filter}
+     // value={filter}
       // onChange={this.filter}
       onChange={this.handleSearch}
       placeholder="Search ..."
