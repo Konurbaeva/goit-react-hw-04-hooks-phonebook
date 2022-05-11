@@ -2,6 +2,7 @@ import {Component} from "react";
 import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
+import Filter from "./Filter";
 
 export class App extends Component {
   state = {
@@ -29,20 +30,12 @@ export class App extends Component {
     }));
   };
 
-/*     filter = query => {
-      console.log('query: ' + JSON.stringify(query));
-      this.setState({ filter: query });
-  };
- */
   handleSearch = e => {
 
    let lowerCase = e.target.value.toLowerCase();
    this.setState({filter: lowerCase});
    console.log('QUERY: ' + JSON.stringify(lowerCase));
   }
-
-
-
 
   handleChange = e => {
     this.setState({ 
@@ -84,18 +77,9 @@ render(){
      <ContactForm handleSubmit={this.handleSubmit} name={name} handleChange={this.handleChange}
      number={number} addContact={this.addContact}/>
       </div>
-
-      <input
-      value={filter}
-      onChange={this.handleSearch}
-      placeholder="Search ..."
-      type="text"
-      name="search"
-/>
-{this.state.filter}
-
       <div className="Contacts">Contacts</div>
-   <ContactList contacts={contacts} deleteContact={this.deleteContact}/>
+      <Filter filter={filter} handleSearch={this.handleSearch}/>
+    <ContactList contacts={contacts} deleteContact={this.deleteContact}/>
     </div> 
   );
  }
