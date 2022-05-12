@@ -61,6 +61,9 @@ render(){
     width:'320px'
 };
 
+const filteredContacts = contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()))
+
+console.log('filteredContacts:  ' + filteredContacts)
   return (
     <div
       style={{
@@ -77,7 +80,7 @@ render(){
       </div>
       <div className="Contacts">Contacts</div>
       <Filter filter={filter} handleSearch={this.handleSearch}/>
-    <ContactList contacts={contacts} deleteContact={this.deleteContact}/>
+    <ContactList contacts={filteredContacts} deleteContact={this.deleteContact}/>
     </div> 
   );
  }

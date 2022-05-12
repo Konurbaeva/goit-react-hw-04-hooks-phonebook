@@ -10,7 +10,6 @@ function Filter({ filter, handleSearch }) {
                 type="text"
                 name="search"
             />
-            {filter}
         </div>
     );
 }
