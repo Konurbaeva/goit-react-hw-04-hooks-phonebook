@@ -52,7 +52,6 @@ const Input = styled.input`
 
 
 const Button = styled.button`
-  /* Adapt the colors based on primary prop */
   background: ${props => props.primary ? "palevioletred" : "white"};
   color: ${props => props.primary ? "white" : "palevioletred"};
 
