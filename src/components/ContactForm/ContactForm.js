@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 
 function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
     return (
         <form onSubmit={handleSubmit}>
             Name
-            <input
+            <Input
                 value={name}
                 onChange={handleChange}
                 placeholder="Enter name"
@@ -16,7 +17,7 @@ function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
                 required
             />
             Number
-            <input
+            <Input
                 value={number}
                 onChange={handleChange}
                 type="tel"
@@ -26,22 +27,7 @@ function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required
             />
-
-            <button type="button" onClick={addContact}
-                style={
-                    {
-                        border: 'none',
-                        padding: '15px 32px',
-                        textAlign: 'center',
-                        textDecoration: 'none',
-                        display: 'inlineBlock',
-                        fontSize: '16px',
-                        margin: '4px 2px',
-                        cursor: 'pointer'
-                    }
-                }
-
-            >Add contact</button>
+            <Button type="button" onClick={addContact}>Add contact</Button>
         </form>
     );
 }
@@ -53,5 +39,29 @@ ContactForm.propTypes = {
     number: PropTypes.string.isRequired,
     addContact: PropTypes.func.isRequired
 };
+
+
+const Input = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: ${props => props.inputColor || "palevioletred"};
+  background: papayawhip;
+  border: none;
+  border-radius: 3px;
+`;
+
+
+const Button = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${props => props.primary ? "palevioletred" : "white"};
+  color: ${props => props.primary ? "white" : "palevioletred"};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
 
 export default ContactForm;
