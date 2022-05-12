@@ -24,6 +24,9 @@ export class App extends Component {
       number: this.state.number
     };
 
+    if (this.state.contacts.find(contact => contact.name === this.state.name))
+    return alert(`${this.state.name} is already in contacts`);
+  
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
@@ -38,7 +41,6 @@ export class App extends Component {
   handleSearch = e => {
    let lowerCase = e.target.value.toLowerCase();
    this.setState({filter: lowerCase});
-   console.log('QUERY: ' + JSON.stringify(lowerCase));
   }
 
   handleChange = e => {
