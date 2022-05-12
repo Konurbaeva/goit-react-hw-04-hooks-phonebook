@@ -63,7 +63,6 @@ render(){
 
 const filteredContacts = contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()))
 
-console.log('filteredContacts:  ' + filteredContacts)
   return (
     <div
       style={{
