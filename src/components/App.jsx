@@ -56,6 +56,18 @@ export class App extends Component {
     form.reset();
   };
 
+  componentDidMount(){
+    console.log('App componentDidMount');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('App componentDidUpdate');
+    console.log(prevState); // before update
+    console.log(this.state); // after update
+    if(this.state.contacts !== prevState.contacts) {
+      console.log('contacts got updated');
+    }
+  }
   
 
 render(){
