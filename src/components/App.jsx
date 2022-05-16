@@ -63,7 +63,9 @@ export class App extends Component {
 
     console.log('contacts from componentDidMount: ' + contacts);
 
-    this.setState({contacts: parsedContacts});
+    if(parsedContacts){
+      this.setState({contacts: parsedContacts});
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
