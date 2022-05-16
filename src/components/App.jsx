@@ -62,10 +62,11 @@ export class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('App componentDidUpdate');
-    console.log(prevState); // before update
-    console.log(this.state); // after update
+
     if(this.state.contacts !== prevState.contacts) {
       console.log('contacts got updated');
+
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
   
