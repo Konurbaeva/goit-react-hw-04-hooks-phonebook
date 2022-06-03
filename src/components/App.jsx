@@ -35,11 +35,8 @@ export function App(){
   }
 
   const deleteContact = contactId => {
-    // setContacts(prevState => ({contacts: prevState.contacts.filter(contact => contact.id !== contactId)}));
-
     setContacts(contacts.filter(contact => contact.id !== contactId));
   };
-
 
   const handleSearch = e => {
    let lowerCase = e.target.value.toLowerCase();
