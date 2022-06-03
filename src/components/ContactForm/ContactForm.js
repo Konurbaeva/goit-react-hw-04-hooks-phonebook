@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 
 function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
+
     return (
         <form onSubmit={handleSubmit}>
             Name
