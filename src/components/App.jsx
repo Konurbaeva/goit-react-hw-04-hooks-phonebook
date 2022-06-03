@@ -1,27 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import Filter from "./Filter";
 
-import useLocalStorage from "./hooks/useLocalStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export function App(){
-  state = {
-    contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    ],
-   name: '',
-   number: '',
-   filter: ''
-  }
+  // state = {
+  //   contacts: [
+  //     {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+  //     {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+  //     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+  //   ],
+  //  name: '',
+  //  number: '',
+  //  filter: ''
+  // }
 
   const [name, setName] = useLocalStorage('name', '');
   const [number, setNumber] = useLocalStorage('number', '');
-  const [filter, setFilter] = useLocalStorage('filter', '');
-  const [contacts, setContacts] = useLocalStorage('contacts', '');
+  const [filter, setFilter] =useState('');
+  // const [contacts, setContacts] = useLocalStorage('contacts', '');
+  const [contacts, setContacts] = useState([]);
 
   const addContact = (e) => {
     const contact = {
@@ -36,15 +37,15 @@ export function App(){
     // this.setState(({ contacts }) => ({
     //   contacts: [contact, ...contacts],
     // }));
-    setContacts(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+    // setContacts(({ contacts }) => ({
+    //   contacts: [contact, ...contacts],
+    // }));
+    setContacts({contacts: [contact, ...contacts]});
   }
 
   const deleteContact = contactId => {
-    setContacts(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
+    setContacts(prevState => ({contacts: prevState.contacts.filter(contact => contact.id !== contactId)}));
+
   };
 
   const handleSearch = e => {
@@ -58,7 +59,8 @@ export function App(){
     //   [e.target.name]: e.currentTarget.value
     // });
 
-    const { name, value } = e.target;
+   // const { name, value } = e.target;
+   const {name, value} = e.currentTarget.value;
 
     switch (name) {
       case 'name':
@@ -67,11 +69,6 @@ export function App(){
 
       case 'number':
         setNumber(value);
-        break;
-
-
-      case 'filter':
-        setFilter(value);
         break;
 
       default:
@@ -100,7 +97,13 @@ export function App(){
   //   }
   // }
 
-  
+  useEffect(() => {
+    window.localStorage.setItem('contacts', JSON.stringify(name))
+  }, [name])
+
+  useEffect(() => {
+    window.localStorage.setItem('contacts', JSON.stringify(number))
+  }, [number])
   
   const borderStyle = {
     padding: '10px',
