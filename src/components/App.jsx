@@ -94,8 +94,10 @@ export function App(){
 
 // const filteredContacts = contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()))
 
-const filteredContacts  = setName(name => name.toLowerCase().includes(filter.toLowerCase()))
+const filteredContacts  = setName(name.toLowerCase().includes(setFilter(filter.toLowerCase()))) 
 
+
+console.log('filteredContacts: ', filteredContacts)
 
   return (
     <div
