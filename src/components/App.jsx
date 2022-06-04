@@ -4,17 +4,10 @@ import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import Filter from "./Filter";
 
-// import useLocalStorage from "../hooks/useLocalStorage";
-
 export function App(){
-
-  // const [name, setName] = useLocalStorage('name', '');
-  // const [number, setNumber] = useLocalStorage('number', '');
-
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [filter, setFilter] =useState('');
-  // const [contacts, setContacts] = useLocalStorage('contacts', '');
   const [contacts, setContacts] = useState(  [
     {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
     {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
@@ -44,7 +37,6 @@ export function App(){
   }
 
   const handleChange = e => {
-
    const {name, value} =  e.target;
 
     switch (name) {
@@ -91,12 +83,7 @@ export function App(){
     width:'320px'
 };
 
-// const filteredContacts = contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()))
-
-// const filteredContacts = contacts.filter((name) => name.includes(filter))
-
-console.log(JSON.stringify(contacts))
-console.log(JSON.stringify(contacts.name))
+ const filteredContacts = contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()))
 
 
   return (
@@ -115,7 +102,7 @@ console.log(JSON.stringify(contacts.name))
       </div>
       <div className="Contacts">Contacts</div>
       <Filter filter={filter} handleSearch={handleSearch}/>
-    <ContactList contacts={contacts} deleteContact={deleteContact}/>
+    <ContactList contacts={filteredContacts} deleteContact={deleteContact}/>
     </div> 
   );
 };
