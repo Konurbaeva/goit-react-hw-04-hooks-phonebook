@@ -5,8 +5,7 @@ import ContactList from "./ContactList";
 import Filter from "./Filter";
 
 export function App(){
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+
   const [filter, setFilter] =useState('');
   const [contacts, setContacts] = useState(  [
     {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -14,50 +13,38 @@ export function App(){
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
   ]);
 
-  const addContact = (e) => {
-    const newContact = {
-      id: nanoid(),
-      name: name,
-      number: number
-    };
+  const formSubmitHandler = ({ name, number }) => {
 
-    if (contacts.find(contact => contact.name === name))
-    return alert(`${name} is already in contacts`);
-  
-    setContacts([...contacts, newContact]);
+    const newName = {
+      id: nanoid(),
+      name,
+      number,
+    }
+
+    const find = contacts.find(
+      ({ name }) =>
+        newName.name.toLocaleLowerCase() === name.toLocaleLowerCase(),
+    );
+
+    if (find) {
+      alert(`${find.name} is alredy in contact`);
+      return;
+    }
+
+    setContacts([newName, ...contacts])
   }
 
   const deleteContact = contactId => {
-    setContacts(contacts.filter(contact => contact.id !== contactId));
+    setContacts(prevContact =>
+      prevContact.filter(contact => contact.id !== contactId))
   };
+
 
   const handleSearch = e => {
    let lowerCase = e.target.value.toLowerCase();
    setFilter(lowerCase);
   }
 
-  const handleChange = e => {
-   const {name, value} =  e.target;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        return;
-    }
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    form.reset();
-  };
 
   useEffect(() => {
     const contacts = localStorage.getItem('contacts')
@@ -67,14 +54,6 @@ export function App(){
       setContacts(parsedContacts);
     }
   }, [])
-
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(name))
-  }, [name])
-
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(number))
-  }, [number])
   
   const borderStyle = {
     padding: '10px',
@@ -97,8 +76,7 @@ export function App(){
       }}
     >
 <div style={borderStyle}>
-     <ContactForm handleSubmit={handleSubmit} name={name} handleChange={handleChange}
-     number={number} addContact={addContact}/>
+        <ContactForm onFormSubmit={formSubmitHandler}/>
       </div>
       <div className="Contacts">Contacts</div>
       <Filter filter={filter} handleSearch={handleSearch}/>

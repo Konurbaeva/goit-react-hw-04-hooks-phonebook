@@ -1,15 +1,46 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useState, useEffect } from "react";
 
 
-function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
+export default function ContactForm({ onFormSubmit }) {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+
+    const reset = () => {
+        setName('');
+        setNumber('');
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        onFormSubmit({ name, number });
+        reset();
+    };
+
+    useEffect(() => {
+        window.localStorage.setItem('contacts', JSON.stringify(name))
+    }, [name])
+
+    useEffect(() => {
+        window.localStorage.setItem('contacts', JSON.stringify(number))
+    }, [number])
+
+    const handleChangeName = e => {
+        setName(e.target.value);
+    };
+
+    const handleChangeNumber = e => {
+        setNumber(e.target.value);
+    };
 
     return (
         <form onSubmit={handleSubmit}>
             Name
             <Input
                 value={name}
-                onChange={handleChange}
+                onChange={handleChangeName}
                 placeholder="Enter name"
                 type="text"
                 name="name"
@@ -20,7 +51,7 @@ function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
             Number
             <Input
                 value={number}
-                onChange={handleChange}
+                onChange={handleChangeNumber}
                 type="tel"
                 name="number"
                 placeholder="Enter phone number"
@@ -28,17 +59,13 @@ function ContactForm({ handleSubmit, name, handleChange, number, addContact }) {
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required
             />
-            <Button type="button" onClick={addContact}>Add contact</Button>
+            <Button type="submit">Add contact</Button>
         </form>
     );
 }
 
 ContactForm.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    number: PropTypes.string.isRequired,
-    addContact: PropTypes.func.isRequired
+    onFormSubmit: PropTypes.func.isRequired,
 };
 
 
@@ -62,6 +89,3 @@ const Button = styled.button`
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
-
-
-export default ContactForm;
